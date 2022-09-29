@@ -1,0 +1,71 @@
+{
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "es2017": true
+  },
+  "globals": {
+    "let": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["dist/**/*"],
+  "extends": ["eslint:recommended", "google"],
+  "rules": {
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error", "log"]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "eslint:recommended",
+        "google",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "plugins": ["@typescript-eslint"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "tsconfig.json",
+        "tsconfigRootDir": "."
+      }
+    },
+    {
+      "files": [""],
+      "parser": "babel-eslint",
+      "rules": {
+        "indent": [
+          "error",
+          4,
+          {
+            "SwitchCase": 1
+          }
+        ],
+        "no-extra-boolean-cast": "error",
+        "no-cond-assign": "error",
+        "no-magic-numbers": [
+          "off",
+          {
+            "ignoreArrayIndexes": true,
+            "ignore": [0, 1],
+            "enforceConst": true
+          }
+        ],
+        "max-params": ["error", 6],
+        "no-var": "error",
+        "no-console": "off",
+        "no-alert": "off",
+        "no-debugger": "off"
+      }
+    }
+  ]
+}

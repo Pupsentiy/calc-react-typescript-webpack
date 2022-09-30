@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 
-const App = () => {
-  return (
-    <div>
-      <h1>123</h1>
-      <h2>Welcome to your First React App..!</h2>
-    </div>
-  );
-};
+import App from './App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import './styles/index.scss';
+
+// eslint-disable-next-line import/no-named-as-default-member
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+  <>
+    <App />
+  </>
+);

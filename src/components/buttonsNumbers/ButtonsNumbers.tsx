@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import { numbers } from '../../common/enum';
-import { IButtonsNumber } from '../../page/Home';
+import { IButtonsNumber } from '../../page/home/Home';
 
 const ButtonsNumbers: React.FC<IButtonsNumber> = ({
   setInputValue,

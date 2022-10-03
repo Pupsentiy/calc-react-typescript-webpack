@@ -1,6 +1,6 @@
 import React, { ChangeEvent, KeyboardEvent } from 'react';
 
-import { ISetInput } from '../../page/Home';
+import { ISetInput } from '../../page/home/Home';
 
 const Input: React.FC<ISetInput> = ({ inputValue, setInputValue, onKeyDown }) => {
   const getChangeValue = (event: ChangeEvent<HTMLInputElement>) => {

@@ -1,6 +1,6 @@
 import React, { KeyboardEvent, useState } from 'react';
-import ButtonsNumbers from '../components/buttonsNumbers/ButtonsNumbers';
-import Input from '../components/input/Input';
+import ButtonsNumbers from '../../components/buttonsNumbers/ButtonsNumbers';
+import Input from '../../components/input/Input';
 
 import './Home.scss';
 

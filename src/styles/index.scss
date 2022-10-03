@@ -1,7 +1,12 @@
+@import "./fonts.scss";
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+html {
+  height: 100%;
 }
 
 ul[class],
@@ -28,10 +33,13 @@ dd {
 
 body {
   line-height: 1.5;
-  font-family: sans-serif;
-  min-height: 100vh;
-  background: linear-gradient(122.76deg, #ffa2a2 4.09%, #ff7b7b 91.04%),
+  font-family: "Geometria";
+  background: linear-gradient(91deg, #ffa2a2 4.09%, #ff7b7b 91.04%),
     linear-gradient(0deg, #fff, #fff);
+  min-width: 320px;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 img {
@@ -50,14 +58,14 @@ select {
   font: inherit;
 }
 
-input[type='number']::-webkit-outer-spin-button,
-input[type='number']::-webkit-inner-spin-button {
--webkit-appearance: none; // Yeah, yeah everybody write about it
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
-input [type='number'],
-input[type='number']:hover,
-input[type='number']:focus {
+input [type="number"],
+input[type="number"]:hover,
+input[type="number"]:focus {
   appearance: none;
   -moz-appearance: textfield;
 }

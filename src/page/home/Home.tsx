@@ -14,8 +14,8 @@ export interface IButtonsNumber {
 
 export interface ISetInput {
   inputValue: string;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
-  onKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void;
+  setInputValue?: React.Dispatch<React.SetStateAction<string>>;
+  onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const Home: React.FC = () => {

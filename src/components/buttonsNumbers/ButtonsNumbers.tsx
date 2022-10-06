@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 
-import { numbers } from '../../common/enum';
-import { IButtonsNumber } from '../../page/home/Home';
+import { numbers } from "../../common/enum";
+import { IButtonsNumber } from "../../page/home/Home";
 
 const ButtonsNumbers: React.FC<IButtonsNumber> = ({
   setInputValue,
@@ -11,16 +11,16 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
   keyPad,
 }) => {
   const getButtonValue = (num: string) => {
-    let inputVal = '';
+    let inputVal = "";
     let result = null;
-    if (num === '=') {
+    if (num === "=") {
       setHistory(inputValue);
       if (inputValue.length > 0) {
-        if (inputValue.includes('√')) {
+        if (inputValue.includes("√")) {
           inputVal = squareRoot(inputValue);
           result = parseString(inputVal);
-          if (inputVal === 'Error') {
-            setHistory('Некорректное выражение!');
+          if (inputVal === "Error") {
+            setHistory("Некорректное выражение!");
           } else {
             return setInputValue(result);
           }
@@ -28,34 +28,33 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
           result = parseString(inputValue);
           setInputValue(result);
         }
-        if (result === 'Infinity' || result === 'NaN') {
-          setInputValue('');
-          setHistory('Некорректное выражение!');
+        if (result === "Infinity" || result === "NaN") {
+          setInputValue("");
+          setHistory("Некорректное выражение!");
         }
       }
-    } else if (num === 'C') {
-      setInputValue('');
-      inputVal = '';
-    } else if (num === '%') {
+    } else if (num === "C") {
+      setInputValue("");
+      inputVal = "";
+    } else if (num === "%") {
       const persent = parseString(inputValue);
       inputVal = String(Number(persent) / 100);
-      setHistory(persent + '%');
+      setHistory(persent + "%");
       setInputValue(inputVal);
-      inputVal = '';
+      inputVal = "";
     } else {
       setInputValue((prevState) => prevState + num);
     }
   };
 
   useEffect(() => {
-    if (keyPad === 'Enter') {
-      getButtonValue('=');
-      setKeyPad('');
-    } else if (keyPad === 'Escape') {
-      getButtonValue('C');
-      setKeyPad('');
+    if (keyPad === "Enter") {
+      getButtonValue("=");
+      setKeyPad("");
+    } else if (keyPad === "Escape") {
+      getButtonValue("C");
+      setKeyPad("");
     }
-    
   }, [keyPad]);
 
   function calculate(rpn: string[]) {
@@ -65,22 +64,22 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
     for (let i = 0; i < rpn.length; i++) {
       value = rpn[i];
       switch (value) {
-        case '+':
+        case "+":
           v2 = values.pop();
           v1 = values.pop();
           values.push(Number(v1) + Number(v2));
           break;
-        case '-':
+        case "-":
           v2 = values.pop();
           v1 = values.pop();
           values.push(Number(v1) - Number(v2));
           break;
-        case 'x':
+        case "x":
           v2 = values.pop();
           v1 = values.pop();
           values.push(Number(v1) * Number(v2));
           break;
-        case '/':
+        case "/":
           v2 = values.pop();
           v1 = values.pop();
           values.push(Number(v1) / Number(v2));
@@ -100,11 +99,11 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
     for (let i = 0; i < num.length; i++) {
       value = num[i];
       switch (value) {
-        case '+':
-        case '-':
+        case "+":
+        case "-":
           if (operators.length) {
             operator = operators.pop();
-            while (operator && operator !== '(') {
+            while (operator && operator !== "(") {
               output.push(operator);
               operator = operators.pop();
             }
@@ -114,11 +113,16 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
           }
           operators.push(value);
           break;
-        case 'x':
-        case '/':
+        case "x":
+        case "/":
           if (operators.length) {
             operator = operators.pop();
-            while (operator && operator !== '(' && operator !== '+' && operator !== '-') {
+            while (
+              operator &&
+              operator !== "(" &&
+              operator !== "+" &&
+              operator !== "-"
+            ) {
               output.push(operator);
               operator = operators.pop();
             }
@@ -128,14 +132,14 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
           }
           operators.push(value);
           break;
-        case '(':
+        case "(":
           operators.push(value);
           break;
-        case ')':
+        case ")":
           operator = operators.pop();
-          while (operator !== '(') {
+          while (operator !== "(") {
             if (!operator) {
-              throw 'Скобки несовместимы';
+              throw "Скобки несовместимы";
             }
             output.push(operator);
             operator = operators.pop();
@@ -154,40 +158,40 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
   }
 
   function parseString(string: string) {
-    string = string.replace(/\s+/g, '');
+    string = string.replace(/\s+/g, "");
 
-    let part = '';
+    let part = "";
     const parts = [];
-    let prev = '';
-    let value = '';
+    let prev = "";
+    let value = "";
 
     for (let i = 0; i < string.length; i++) {
       value = string[i];
       switch (value) {
-        case '+':
-        case 'x':
-        case '/':
-        case '(':
-        case ')':
+        case "+":
+        case "x":
+        case "/":
+        case "(":
+        case ")":
           if (part) {
             parts.push(part);
-            part = '';
+            part = "";
           }
           parts.push(value);
           break;
-        case '-':
+        case "-":
           if (part) {
             parts.push(part);
-            part = '';
+            part = "";
             parts.push(value);
           } else {
             if (
               i === 0 ||
-              prev === '+' ||
-              prev === '-' ||
-              prev === 'x' ||
-              prev === '/' ||
-              prev === '('
+              prev === "+" ||
+              prev === "-" ||
+              prev === "x" ||
+              prev === "/" ||
+              prev === "("
             ) {
               part = value;
             } else {
@@ -207,16 +211,20 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
   }
 
   function squareRoot(squareString: string) {
-    const index = squareString.indexOf('√');
+    const index = squareString.indexOf("√");
     const sliceNumber = squareString.slice(index + 1, squareString.length);
     const arr = getNumber(sliceNumber);
     let stringRep = null;
-    if (arr[1] === '0') {
-      return 'Error';
+    if (arr[1] === "0") {
+      return "Error";
     }
     if (index > 0) {
-      if (['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'].includes(squareString[index - 1])) {
-        stringRep = squareString.replace(arr[0], 'x' + arr[1]);
+      if (
+        ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].includes(
+          squareString[index - 1]
+        )
+      ) {
+        stringRep = squareString.replace(arr[0], "x" + arr[1]);
       } else {
         stringRep = squareString.replace(arr[0], arr[1]);
       }
@@ -227,18 +235,22 @@ const ButtonsNumbers: React.FC<IButtonsNumber> = ({
     return stringRep;
 
     function getNumber(string: string) {
-      let number = '';
+      let number = "";
       for (let i = 0; i < string.length; i++) {
-        if (!['+', '*', '/', '-', '(', ')'].includes(string[i])) {
+        if (!["+", "*", "/", "-", "(", ")"].includes(string[i])) {
           number += string[i];
         } else {
-          return ['√' + number, String(Math.sqrt(Number(number)))];
+          return ["√" + number, String(Math.sqrt(Number(number)))];
         }
       }
 
-      return ['√' + number, String(Math.sqrt(Number(number)))];
+      return ["√" + number, String(Math.sqrt(Number(number)))];
     }
   }
+  
+
+ 
+
   return (
     <>
       {numbers &&
